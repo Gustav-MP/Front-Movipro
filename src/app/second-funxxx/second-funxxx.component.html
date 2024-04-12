@@ -1,0 +1,4 @@
+<h3>Los juegos de {{ username }}</h3>
+@for (game of games; track game.id) {
+  <li (click)="addFav(game.name)">{{ game.name }}</li>
+}

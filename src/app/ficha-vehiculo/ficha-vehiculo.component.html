@@ -1,0 +1,148 @@
+<div class="card-vehicle-container mat-elevation-z8">
+  <mat-card
+    class="vehicle-card"
+    [ngClass]="{
+      'vehicle-card': true,
+      'border-top-ok': vehicle?.status === 'Ok',
+      'border-top-pending': vehicle?.status === 'Pendiente',
+      'border-top-reject': vehicle?.status === 'Rechazado'
+    }"
+  >
+    <mat-card-header>
+      <div
+        mat-card-avatar
+        [ngClass]="{
+          'card-avatar-ok': vehicle?.status === 'Ok',
+          'card-avatar-pending': vehicle?.status === 'Pendiente',
+          'card-avatar-reject': vehicle?.status === 'Rechazado'
+        }"
+      ></div>
+      <mat-card-title>{{
+        vehicle?.marca + " | " + vehicle?.modelo
+      }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ vehicle?.patente }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <div class="content-container">
+      <mat-card-content>
+        <div class="list-container">
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <strong class="downBold">VIN:</strong>
+              {{ vehicle?.chasis }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <strong class="downBold">Empresa:</strong>
+              {{ vehicle?.empresa }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <strong class="downBold">Plan:</strong>
+              {{ vehicle?.plan_contratado }}
+            </mat-list-item>
+          </mat-list>
+          <mat-list role="list">
+            <mat-list-item role="listitem">
+              <strong class="downBold">Región:</strong>
+              {{ vehicle?.region }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <strong class="downBold">Última RT:</strong>
+              {{ vehicle?.ultima_revision }}
+            </mat-list-item>
+            <mat-list-item role="listitem">
+              <strong class="downBold">Última mantención:</strong>
+              {{ vehicle?.ultima_mantencion }}
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Mantención </mat-panel-title>
+              <mat-panel-description>
+                Agende un mantenimiento
+                <mat-icon>date_range</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="date-place-section">
+              <mat-form-field>
+                <mat-label>Fecha</mat-label>
+                <input
+                  matInput
+                  [matDatepicker]="picker"
+                  (focus)="picker.open()"
+                  readonly
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>Comuna</mat-label>
+                <mat-select name="comuna">
+                  @for (comuna of comunas; track comuna) {
+                    <mat-option [value]="comuna.name">
+                      {{ comuna.name }}
+                    </mat-option>
+                  }
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-form-field class="description-section">
+              <mat-label>
+                Agregue un comentario o descripcion del servicio
+              </mat-label>
+              <textarea
+                matInput
+                placeholder="Ej. Vehiculo necesita cambios de pastillas de frenos"
+              ></textarea>
+            </mat-form-field>
+            <mat-datepicker #picker></mat-datepicker>
+            <button
+              mat-raised-button
+              color="primary"
+              (click)="showDisclaimer()"
+            >
+              Agendar mantención
+            </button>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title> Guantera </mat-panel-title>
+              <mat-panel-description>
+                Revise sus documentos
+                <mat-icon>description</mat-icon>
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-list class="documents-container">
+              @for (doc of documents; track doc) {
+                @if (doc.url !== "") {
+                  <a class="document-link" href="{{ doc.url }}" target="_blank">
+                    <mat-list-item>
+                      <mat-icon matListItemIcon>note</mat-icon>
+                      <div matListItemTitle>{{ doc.nombre }}</div>
+                      <div matListItemLine>{{ doc.fecha }}</div>
+                    </mat-list-item>
+                  </a>
+                } @else {
+                  <mat-list-item
+                    class="document-link"
+                    (click)="
+                      showToast(
+                        'Este vehiculo no tiene este tipo de documento.'
+                      )
+                    "
+                  >
+                    <mat-icon matListItemIcon>note</mat-icon>
+                    <div matListItemTitle>{{ doc.nombre }}</div>
+                    <div matListItemLine>{{ doc.fecha }}</div>
+                  </mat-list-item>
+                }
+              }
+            </mat-list>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-card-actions>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,33 @@
+<mat-grid-list cols="6" rowHeight="100%">
+  <mat-grid-tile class="sidebar" [colspan]="1" [rowspan]="1">
+    <img src="../assets/logo_movipro.png" class="imagen-estilizada" />
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <a [routerLink]="['/flota']" routerLinkActive="selected"> Mi Flota </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a [routerLink]="['/cuenta']" routerLinkActive="selected">
+          Mi Cuenta
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a [routerLink]="['/vehiculos']" routerLinkActive="selected">
+          Mis Vehículos
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a [routerLink]="['/documentos']" routerLinkActive="selected">
+          Mi Documentos
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <a [routerLink]="['/alertas']" routerLinkActive="selected">
+          Mis Alertas
+        </a>
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+  <mat-grid-tile class="content" [colspan]="5" [rowspan]="1">
+    <router-outlet />
+  </mat-grid-tile>
+</mat-grid-list>

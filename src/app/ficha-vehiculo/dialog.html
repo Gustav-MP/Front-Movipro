@@ -1,0 +1,31 @@
+<h2 mat-dialog-title>Condiciones agendamiento para mantención</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Agendamiento</h3>
+  <p>
+    La fecha solicitada queda sujetas a confirmación por parte del Asesor
+    Movipro. Ud. recibirá un correo confirmando fecha y hora del servicio. En
+    caso de no haber disponibilidad para la fecha y hora solicitada, el asesor
+    Movipro se pondrá en contacto con Ud. vía telefónica para buscar una nueva
+    alternativa.
+  </p>
+
+  <h3>Notificaciones de estado en taller</h3>
+  <p>
+    Será notificado del estado de sus vehículos en el taller vía Whatsapp por
+    parte de nuestro asesor Movipro, quien le informará cuando haya cambio de
+    estado.
+  </p>
+
+  <h3>Emergencias</h3>
+  <p>
+    Si busca agendar en el contexto de una emergencia (vehículo detenido,
+    requiere traslado a taller) póngase en contacto con nuestro asesor Movipro
+    para resolver su situación a la brevedad.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" [mat-dialog-close]="false">Declino</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>
+    Agendar
+  </button>
+</mat-dialog-actions>

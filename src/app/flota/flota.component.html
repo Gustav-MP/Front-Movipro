@@ -1,0 +1,97 @@
+<div class="father-container">
+  <h1>Información de flota</h1>
+  <mat-form-field>
+    <mat-label>Busqueda</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Ejemplo: HCLK56"
+      #input
+    />
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <ng-container matColumnDef="patente">
+        <th mat-header-cell *matHeaderCellDef>Patente</th>
+        <td mat-cell *matCellDef="let element">{{ element.patente }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="marca">
+        <th mat-header-cell *matHeaderCellDef>Marca</th>
+        <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef>Modelo</th>
+        <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="region">
+        <th mat-header-cell *matHeaderCellDef>Región</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.region }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="empresa">
+        <th mat-header-cell *matHeaderCellDef>Empresa</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.empresa }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mantenimiento">
+        <th mat-header-cell *matHeaderCellDef>Tipo Mant.</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.mantenimiento }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="proxima_mantencion">
+        <th mat-header-cell *matHeaderCellDef>Próximo Mant.</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.proxima_mantencion }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <td mat-cell *matCellDef="let element" id="statusContainer">
+          <div
+            id="statusPoint"
+            [ngClass]="{
+              'status-color-ok': element.status === 'Ok',
+              'status-color-pending': element.status === 'Pendiente',
+              'status-color-reject': element.status === 'Rechazado'
+            }"
+          ></div>
+          <p>
+            {{ element.status }}
+          </p>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: displayedColumns; let i = index"
+        (click)="pickedVehicle(row, i)"
+        [class.active]="row.id === selectedVehicle?.id"
+      ></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          No hay datos para la busqueda de "{{ input.value }}"
+        </td>
+      </tr>
+    </table>
+    <mat-paginator
+      [pageSizeOptions]="[5]"
+      showFirstLastButtons
+      aria-label="Select page of users"
+    ></mat-paginator>
+  </div>
+  @if (selectedVehicle !== null) {
+    <app-ficha-vehiculo [vehicle]="selectedVehicle"></app-ficha-vehiculo>
+  }
+</div>

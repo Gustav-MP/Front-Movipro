@@ -1,0 +1,134 @@
+.card-vehicle-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.vehicle-card {
+  min-width: 100%;
+}
+
+.border-top-ok {
+  border-top: solid 0.5rem #c4f5b9;
+}
+
+.border-top-pending {
+  border-top: solid 0.5rem #ffdfbf;
+}
+
+.border-top-reject {
+  border-top: solid 0.5rem #ffd5dc;
+}
+
+.card-avatar-ok {
+  background-image: url("https://api.dicebear.com/8.x/icons/svg?icon=handThumbsUp&backgroundColor=c4f5b9");
+  background-size: cover;
+}
+
+.card-avatar-pending {
+  background-image: url("https://api.dicebear.com/8.x/icons/svg?icon=lightbulb&backgroundColor=ffdfbf");
+  background-size: cover;
+}
+
+.card-avatar-reject {
+  background-image: url("https://api.dicebear.com/8.x/icons/svg?icon=flag&backgroundColor=ffd5dc");
+  background-size: cover;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+h3 {
+  font-weight: bold;
+}
+
+mat-accordion {
+  width: 100%;
+}
+
+mat-card-actions {
+  align-items: start;
+  width: 50%;
+  padding: 16px 16px 16px 0px;
+}
+
+mat-card-content {
+  padding: 0px !important;
+  width: 50%;
+}
+
+::ng-deep mat-list-item span span {
+  font-size: 14px !important;
+}
+
+.downBold {
+  font-weight: 500;
+}
+
+.mat-mdc-card {
+  box-shadow: none;
+}
+
+.example-action-buttons {
+  padding-bottom: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.example-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
+  margin-left: 8px;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.description-section {
+  width: 100%;
+}
+
+button {
+  background-color: #ff5a4e !important;
+}
+
+.date-place-section {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.document-link {
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+.document-link:hover {
+  border-bottom: 2px solid #ff5a4e;
+}
+
+.mat-mdc-list-item {
+  cursor: pointer;
+}
+
+.documents-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.content-container {
+  display: flex;
+}
+
+::ng-deep .mdc-snackbar__surface {
+  background-color: #002140 !important;
+}

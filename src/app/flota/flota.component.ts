@@ -4,6 +4,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { FichaVehiculoComponent } from '../ficha-vehiculo/ficha-vehiculo.component';
 import { CommonModule } from '@angular/common';
 
@@ -307,7 +308,8 @@ const ELEMENT_DATA: Vehicle[] = [
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   templateUrl: './flota.component.html',
   styleUrl: './flota.component.css'
@@ -330,6 +332,7 @@ export class FlotaComponent implements AfterViewInit {
   selectedRowIndex: number | null = null;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -337,6 +340,7 @@ export class FlotaComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {

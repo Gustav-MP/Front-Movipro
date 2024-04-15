@@ -10,52 +10,52 @@
     />
   </mat-form-field>
   <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="patente">
-        <th mat-header-cell *matHeaderCellDef>Patente</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Patente</th>
         <td mat-cell *matCellDef="let element">{{ element.patente }}</td>
       </ng-container>
 
       <ng-container matColumnDef="marca">
-        <th mat-header-cell *matHeaderCellDef>Marca</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Marca</th>
         <td mat-cell *matCellDef="let element">{{ element.marca }}</td>
       </ng-container>
 
       <ng-container matColumnDef="modelo">
-        <th mat-header-cell *matHeaderCellDef>Modelo</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Modelo</th>
         <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
       </ng-container>
 
       <ng-container matColumnDef="region">
-        <th mat-header-cell *matHeaderCellDef>Región</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Región</th>
         <td mat-cell *matCellDef="let element">
           {{ element.region }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="empresa">
-        <th mat-header-cell *matHeaderCellDef>Empresa</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
         <td mat-cell *matCellDef="let element">
           {{ element.empresa }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="mantenimiento">
-        <th mat-header-cell *matHeaderCellDef>Tipo Mant.</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Mant.</th>
         <td mat-cell *matCellDef="let element">
           {{ element.mantenimiento }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="proxima_mantencion">
-        <th mat-header-cell *matHeaderCellDef>Próximo Mant.</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Próximo Mant.</th>
         <td mat-cell *matCellDef="let element">
           {{ element.proxima_mantencion }}
         </td>
       </ng-container>
 
       <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Estado</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
         <td mat-cell *matCellDef="let element" id="statusContainer">
           <div
             id="statusPoint"

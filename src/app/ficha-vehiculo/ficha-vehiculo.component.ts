@@ -107,7 +107,9 @@ export class FichaVehiculoComponent {
   }
 
   showToast(message: string) {
-    this._snackBar.open(message, 'X');
+    this._snackBar.open(message, 'X', {
+      duration: 3000
+    });
   }
 }
 

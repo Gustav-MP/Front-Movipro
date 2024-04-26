@@ -8,7 +8,6 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { FichaVehiculoComponent } from '../ficha-vehiculo/ficha-vehiculo.component';
 import { CommonModule } from '@angular/common';
 
-
 export interface Vehicle {
   id: string;
   patente: string;
@@ -44,7 +43,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '10/03/2024' },
       { nombre: 'Padrón', url: '', fecha: '15/01/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '23/01/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '23/01/2023' },
     ],
     patente: 'RRCX35',
     chasis: '1HGCM82633A508642',
@@ -61,7 +60,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Sofía González',
     kms: '83.000',
     siniestros: 5,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '2',
@@ -70,7 +69,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '10/03/2024' },
       { nombre: 'Padrón', url: '', fecha: '01/03/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '08/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' },
     ],
     patente: 'TVCQ68',
     chasis: '3FAHP0HA5CR107985',
@@ -87,16 +86,24 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'David Martínez',
     kms: '65.000',
     siniestros: 8,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '3',
     docs: [
-      { nombre: 'SOAP', url: 'https://drive.google.com/file/d/1fOx2gwzIQi_ONVbS_rsJ6QZYgJhQw1X7/view?usp=sharing', fecha: '09/01/2024' },
-      { nombre: 'Permiso circulación', url: 'https://drive.google.com/file/d/1nTIFkoeQ1ESmsoDTUp9-6diEnwbUOXHu/view?usp=sharing', fecha: '16/03/2024' },
+      {
+        nombre: 'SOAP',
+        url: 'https://drive.google.com/file/d/1fOx2gwzIQi_ONVbS_rsJ6QZYgJhQw1X7/view?usp=sharing',
+        fecha: '09/01/2024',
+      },
+      {
+        nombre: 'Permiso circulación',
+        url: 'https://drive.google.com/file/d/1nTIFkoeQ1ESmsoDTUp9-6diEnwbUOXHu/view?usp=sharing',
+        fecha: '16/03/2024',
+      },
       { nombre: 'Padrón', url: '', fecha: '12/02/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '23/02/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '23/02/2023' },
     ],
     patente: 'AOXE46',
     chasis: '2FMGK5BC9EB906857',
@@ -113,7 +120,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Laura Sánchez',
     kms: '74.000',
     siniestros: 8,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '4',
@@ -122,7 +129,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '14/01/2024' },
       { nombre: 'Padrón', url: '', fecha: '19/03/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' },
     ],
     patente: 'HLUT59',
     chasis: '5XYZT3LB2GG805436',
@@ -139,7 +146,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Ana Torres',
     kms: '71.000',
     siniestros: 1,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '5',
@@ -148,7 +155,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '20/02/2024' },
       { nombre: 'Padrón', url: '', fecha: '25/01/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '28/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '03/01/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '03/01/2023' },
     ],
     patente: 'GOVC80',
     chasis: '1G1ZE5ST6GF704123',
@@ -165,7 +172,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Lucía López',
     kms: '69.000',
     siniestros: 7,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '6',
@@ -174,7 +181,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '10/03/2024' },
       { nombre: 'Padrón', url: '', fecha: '01/03/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '08/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '13/03/2023' },
     ],
     patente: 'ZKWJ36',
     chasis: '2T3WFREV5FW603912',
@@ -191,7 +198,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Luis Rodríguez',
     kms: '39.000',
     siniestros: 4,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '7',
@@ -200,7 +207,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '10/03/2024' },
       { nombre: 'Padrón', url: '', fecha: '15/01/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '30/01/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '30/01/2023' },
     ],
     patente: 'CBYG70',
     chasis: '4T1BF1FK5GU502678',
@@ -217,7 +224,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'David Martínez',
     kms: '82.000',
     siniestros: 3,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '8',
@@ -226,7 +233,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '20/02/2024' },
       { nombre: 'Padrón', url: '', fecha: '25/01/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '28/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '15/01/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '15/01/2023' },
     ],
     patente: 'GXGJ52',
     chasis: '3N1AB7AP7KY301456',
@@ -243,7 +250,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Ana Torres',
     kms: '34.000',
     siniestros: 5,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '9',
@@ -252,7 +259,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '14/01/2024' },
       { nombre: 'Padrón', url: '', fecha: '19/03/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '09/03/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '09/03/2023' },
     ],
     patente: 'EDLR04',
     chasis: '1FTEX1EP4GKF10234',
@@ -269,7 +276,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Ana Torres',
     kms: '99.000',
     siniestros: 9,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
   {
     id: '10',
@@ -278,7 +285,7 @@ const ELEMENT_DATA: Vehicle[] = [
       { nombre: 'Permiso circulación', url: '', fecha: '16/03/2024' },
       { nombre: 'Padrón', url: '', fecha: '12/02/2024' },
       { nombre: 'Seguro asociado', url: '', fecha: '18/04/2021' },
-      { nombre: 'Cert. Mantención', url: '', fecha: '23/02/2023' }
+      { nombre: 'Cert. Mantención', url: '', fecha: '23/02/2023' },
     ],
     patente: 'IJKS70',
     chasis: '5YJ3E1EA7HF000316',
@@ -295,7 +302,7 @@ const ELEMENT_DATA: Vehicle[] = [
     conductor: 'Manuel Gómez',
     kms: '82.000',
     siniestros: 1,
-    plan_contratado: 'Inicia'
+    plan_contratado: 'Inicia',
   },
 ];
 
@@ -309,13 +316,11 @@ const ELEMENT_DATA: Vehicle[] = [
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   templateUrl: './flota.component.html',
-  styleUrl: './flota.component.css'
+  styleUrl: './flota.component.css',
 })
-
-
 export class FlotaComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'patente',
@@ -325,7 +330,7 @@ export class FlotaComponent implements AfterViewInit {
     'empresa',
     'mantenimiento',
     'proxima_mantencion',
-    'status'
+    'status',
   ];
   dataSource: MatTableDataSource<Vehicle>;
   selectedVehicle: Vehicle | null = null;
@@ -355,5 +360,4 @@ export class FlotaComponent implements AfterViewInit {
     this.selectedRowIndex = index;
     this.selectedVehicle = vehicle;
   }
-
 }

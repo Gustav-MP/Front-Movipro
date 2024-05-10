@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {
   animate,
@@ -13,6 +14,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { AdminService } from '../../../services/admin/admin.service';
 import { Account } from '../../../interfaces/admin/accounts.interface';
 import { Invoicing } from '../../../interfaces/admin/invoicing.interface';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cuentas',
@@ -27,17 +29,17 @@ import { Invoicing } from '../../../interfaces/admin/invoicing.interface';
       ),
     ]),
   ],
-  imports: [MatTableModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatTableModule, MatButtonModule, MatIconModule],
   templateUrl: './cuentas.component.html',
   styleUrl: './cuentas.component.css',
 })
 export class CuentasComponent implements OnInit {
-  subscriptions!: any[];
+  subscriptions: Subscription[] = [];
   columnsToDisplay = ['empresa', 'rut', 'telefono', 'email'];
   columnsToDisplayWithExpand = [...this.columnsToDisplay, 'expand'];
   expandedElement!: Account | null;
   dataSource = new MatTableDataSource<Account>([]);
-  invoicingInfo: string | null = null;
+  invoicingInfo: Invoicing | null = null;
 
   constructor(private adminService: AdminService) {}
 
@@ -60,22 +62,34 @@ export class CuentasComponent implements OnInit {
       this.expandedElement = null;
       this.invoicingInfo = null;
     } else {
+      if (this.expandedElement) {
+        const existingSubIndex = this.subscriptions.findIndex(
+          (sub) => sub.closed === false,
+        );
+        if (existingSubIndex !== -1) {
+          this.subscriptions[existingSubIndex].unsubscribe();
+          this.subscriptions.splice(existingSubIndex, 1);
+        }
+      }
       this.expandedElement = account;
-      this.invoicingInfo = this.getInvoicing(account.id);
+      const subscription = this.adminService
+        .getInvoicingByAccount(account.id)
+        .subscribe({
+          next: (invoicing) => {
+            this.invoicingInfo = invoicing;
+            console.log('Invoicing fetched:', invoicing);
+          },
+          error: (error) => {
+            console.error('Error fetching invoicing:', error);
+            this.invoicingInfo = null;
+          },
+        });
+      this.subscriptions.push(subscription);
     }
   }
 
-  getInvoicing(id_account: number) {
-    this.subscriptions = [
-      this.adminService.getInvoicingByAccount(id_account).subscribe({
-        next: (invoicing) => {
-          console.log('Invoicing fetched:', invoicing);
-        },
-        error: (error) => {
-          console.error('Error fetching invoicing:', error);
-        },
-      }),
-    ];
-    return 'peo';
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
+    this.subscriptions = [];
   }
 }

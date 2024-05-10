@@ -3,7 +3,11 @@ export const environment = {
   baseUrl: 'https://api.movipro.cl/',
   api: {
     auth: {
-      getUser: 'auth/getUser/',
+      getUser: 'auth/byUserId/',
+    },
+    admin: {
+      getAllAccounts: 'admin/accounts/all',
+      getInvoicingByAccount: 'admin/invoicing/byAccount',
     },
   },
 };

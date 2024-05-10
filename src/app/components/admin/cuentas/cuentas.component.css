@@ -35,6 +35,7 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-detail {
   overflow: hidden;
   display: flex;
+  flex-direction: column;
 }
 
 .example-element-diagram {
@@ -62,4 +63,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 strong {
   font-weight: 500;
+}
+
+#paymentLink {
+  cursor: pointer;
 }

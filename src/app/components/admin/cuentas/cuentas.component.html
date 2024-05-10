@@ -38,7 +38,23 @@
           "
         >
           <div class="example-element-description">
-            <strong>Fecha facturación:</strong> 17/04/1987
+            <strong>Fecha facturación:</strong>
+            {{ invoicingInfo?.fecha_proximo_cobro }}
+          </div>
+          <div class="example-element-description">
+            <strong>Monto a pagar:</strong>
+            {{
+              invoicingInfo?.monto_a_pagar
+                | currency: "CLP" : "symbol" : "1.0-0" : "es-CL"
+            }}
+          </div>
+          <div class="example-element-description">
+            <strong>Link pago cliente:</strong>
+            <p id="paymentLink" (click)="copyLink(element.id)">
+              {{
+                "https://movipro.cl/pasarela-de-pago/?account_id=" + element.id
+              }}
+            </p>
           </div>
         </div>
       </td>

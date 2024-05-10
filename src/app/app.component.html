@@ -1,6 +1,8 @@
 <mat-grid-list cols="6" rowHeight="100%">
   <mat-grid-tile class="sidebar" [colspan]="1" [rowspan]="1">
-    <img src="../assets/logo_movipro.png" class="imagen-estilizada" />
+    <a [routerLink]="['/login/admin']">
+      <img src="../assets/logo_movipro.png" class="imagen-estilizada" />
+    </a>
     <mat-list role="list">
       <mat-list-item role="listitem">
         <a [routerLink]="['/flota']" routerLinkActive="selected"> Mi Flota </a>

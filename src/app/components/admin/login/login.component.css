@@ -1,0 +1,32 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 60%;
+}
+
+h1 {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: 500;
+  margin: 2rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  padding: 4rem;
+}
+
+button {
+  margin-top: 1rem;
+}
+
+p {
+  font-size: large;
+  font-weight: 100;
+  color: red;
+  border-bottom: 1px solid red;
+  margin: 1rem auto;
+}

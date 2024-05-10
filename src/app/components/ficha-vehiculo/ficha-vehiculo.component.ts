@@ -33,48 +33,48 @@ import { CommonModule } from '@angular/common';
     MatInputModule,
     MatFormFieldModule,
     MatIconModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   templateUrl: './ficha-vehiculo.component.html',
-  styleUrl: './ficha-vehiculo.component.css'
+  styleUrl: './ficha-vehiculo.component.css',
 })
 export class FichaVehiculoComponent {
   private _vehicle: Vehicle | null = null;
   public disclaimerAccepted = false;
   public comunas = [
-    { name: "Cerrillos" },
-    { name: "Cerro Navia" },
-    { name: "Conchalí" },
-    { name: "El Bosque" },
-    { name: "Estación Central" },
-    { name: "Huechuraba" },
-    { name: "Independencia" },
-    { name: "La Cisterna" },
-    { name: "La Florida" },
-    { name: "La Granja" },
-    { name: "La Pintana" },
-    { name: "La Reina" },
-    { name: "Las Condes" },
-    { name: "Lo Barnechea" },
-    { name: "Lo Espejo" },
-    { name: "Lo Prado" },
-    { name: "Macul" },
-    { name: "Maipú" },
-    { name: "Ñuñoa" },
-    { name: "Pedro Aguirre Cerda" },
-    { name: "Peñalolén" },
-    { name: "Providencia" },
-    { name: "Pudahuel" },
-    { name: "Puente Alto" },
-    { name: "Quilicura" },
-    { name: "Quinta Normal" },
-    { name: "Recoleta" },
-    { name: "Renca" },
-    { name: "San Joaquín" },
-    { name: "San Miguel" },
-    { name: "San Ramón" },
-    { name: "Santiago" },
-    { name: "Vitacura" }
+    { name: 'Cerrillos' },
+    { name: 'Cerro Navia' },
+    { name: 'Conchalí' },
+    { name: 'El Bosque' },
+    { name: 'Estación Central' },
+    { name: 'Huechuraba' },
+    { name: 'Independencia' },
+    { name: 'La Cisterna' },
+    { name: 'La Florida' },
+    { name: 'La Granja' },
+    { name: 'La Pintana' },
+    { name: 'La Reina' },
+    { name: 'Las Condes' },
+    { name: 'Lo Barnechea' },
+    { name: 'Lo Espejo' },
+    { name: 'Lo Prado' },
+    { name: 'Macul' },
+    { name: 'Maipú' },
+    { name: 'Ñuñoa' },
+    { name: 'Pedro Aguirre Cerda' },
+    { name: 'Peñalolén' },
+    { name: 'Providencia' },
+    { name: 'Pudahuel' },
+    { name: 'Puente Alto' },
+    { name: 'Quilicura' },
+    { name: 'Quinta Normal' },
+    { name: 'Recoleta' },
+    { name: 'Renca' },
+    { name: 'San Joaquín' },
+    { name: 'San Miguel' },
+    { name: 'San Ramón' },
+    { name: 'Santiago' },
+    { name: 'Vitacura' },
   ];
 
   @Input()
@@ -83,7 +83,6 @@ export class FichaVehiculoComponent {
     this.documents = value?.docs ?? [];
   }
 
-
   get vehicle(): Vehicle | null {
     return this._vehicle;
   }
@@ -91,24 +90,29 @@ export class FichaVehiculoComponent {
 
   documents: Document[] = this.vehicle?.docs ?? [];
 
-  constructor(public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+  constructor(
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
+  ) {}
 
   showDisclaimer() {
     const dialogRef = this.dialog.open(DialogContent);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
       if (result === true) {
         this.disclaimerAccepted = true;
-        this.showToast('Solicitud enviada. Lo contactaremos para confirmar el servicio.')
+        this.showToast(
+          'Solicitud enviada. Lo contactaremos para confirmar el servicio.',
+        );
       } else {
-        this.showToast('No se ha agendado el mantenimiento.')
+        this.showToast('No se ha agendado el mantenimiento.');
       }
     });
   }
 
   showToast(message: string) {
     this._snackBar.open(message, 'X', {
-      duration: 3000
+      duration: 3000,
     });
   }
 }
@@ -120,4 +124,4 @@ export class FichaVehiculoComponent {
   styleUrl: './ficha-vehiculo.component.css',
   imports: [MatDialogModule, MatButtonModule],
 })
-export class DialogContent { }
+export class DialogContent {}

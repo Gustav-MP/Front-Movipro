@@ -1,0 +1,30 @@
+<h1>Login Admin</h1>
+
+<div class="login-container mat-elevation-z8">
+  <form class="login-form">
+    <mat-form-field>
+      <mat-label>Ingresa tu email</mat-label>
+      <input
+        matInput
+        placeholder="holi@movipro.cl"
+        [formControl]="email"
+        (blur)="updateErrorMessage()"
+        required
+      />
+      @if (email.invalid) {
+        <mat-error>{{ errorMessage }}</mat-error>
+      }
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="primary"
+      [disabled]="!email.valid"
+      (click)="tryLogin()"
+    >
+      Ingresar
+    </button>
+    @if (apiError) {
+      <p>El email no tiene permisos</p>
+    }
+  </form>
+</div>

@@ -11,7 +11,9 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-app-flota {
+app-flota,
+app-adminLogin,
+app-cuentas {
   width: 100%;
   height: -webkit-fill-available;
   overflow: auto;

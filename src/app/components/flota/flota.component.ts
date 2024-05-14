@@ -27,6 +27,7 @@ export interface Vehicle {
   siniestros: number;
   docs: Document[];
   plan_contratado: string;
+  uid: string;
 }
 
 export interface Document {
@@ -61,6 +62,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '83.000',
     siniestros: 5,
     plan_contratado: 'Inicia',
+    uid: 'D74365',
   },
   {
     id: '2',
@@ -87,6 +89,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '65.000',
     siniestros: 8,
     plan_contratado: 'Inicia',
+    uid: '864754',
   },
   {
     id: '3',
@@ -121,6 +124,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '74.000',
     siniestros: 8,
     plan_contratado: 'Inicia',
+    uid: '9B2D9D',
   },
   {
     id: '4',
@@ -147,6 +151,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '71.000',
     siniestros: 1,
     plan_contratado: 'Inicia',
+    uid: '9740F2',
   },
   {
     id: '5',
@@ -173,6 +178,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '69.000',
     siniestros: 7,
     plan_contratado: 'Inicia',
+    uid: '480BCC',
   },
   {
     id: '6',
@@ -199,6 +205,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '39.000',
     siniestros: 4,
     plan_contratado: 'Inicia',
+    uid: '8FDF70',
   },
   {
     id: '7',
@@ -225,6 +232,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '82.000',
     siniestros: 3,
     plan_contratado: 'Inicia',
+    uid: '02B05A',
   },
   {
     id: '8',
@@ -251,6 +259,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '34.000',
     siniestros: 5,
     plan_contratado: 'Inicia',
+    uid: '72464D',
   },
   {
     id: '9',
@@ -277,6 +286,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '99.000',
     siniestros: 9,
     plan_contratado: 'Inicia',
+    uid: 'DDBAD9',
   },
   {
     id: '10',
@@ -303,6 +313,7 @@ const ELEMENT_DATA: Vehicle[] = [
     kms: '82.000',
     siniestros: 1,
     plan_contratado: 'Inicia',
+    uid: '62FA96',
   },
 ];
 

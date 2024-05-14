@@ -1,13 +1,16 @@
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3000/',
   api: {
+    baseUrl: 'http://localhost:3000/',
     auth: {
-      getUser: 'auth/byUserId/',
+      getUser: 'auth/byUserId',
     },
     admin: {
       getAllAccounts: 'admin/accounts/all',
       getInvoicingByAccount: 'admin/invoicing/byAccount',
+    },
+    gps: {
+      getLastStatus: 'gps/last-status',
     },
   },
 };

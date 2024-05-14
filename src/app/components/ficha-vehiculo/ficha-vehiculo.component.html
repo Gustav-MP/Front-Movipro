@@ -3,25 +3,25 @@
     class="vehicle-card"
     [ngClass]="{
       'vehicle-card': true,
-      'border-top-ok': vehicle?.status === 'Ok',
-      'border-top-pending': vehicle?.status === 'Pendiente',
-      'border-top-reject': vehicle?.status === 'Rechazado'
+      'border-top-ok': vehicle.status === 'Ok',
+      'border-top-pending': vehicle.status === 'Pendiente',
+      'border-top-reject': vehicle.status === 'Rechazado'
     }"
   >
     <mat-card-header>
       <div
         mat-card-avatar
         [ngClass]="{
-          'card-avatar-ok': vehicle?.status === 'Ok',
-          'card-avatar-pending': vehicle?.status === 'Pendiente',
-          'card-avatar-reject': vehicle?.status === 'Rechazado'
+          'card-avatar-ok': vehicle.status === 'Ok',
+          'card-avatar-pending': vehicle.status === 'Pendiente',
+          'card-avatar-reject': vehicle.status === 'Rechazado'
         }"
       ></div>
       <mat-card-title>{{
-        vehicle?.marca + " | " + vehicle?.modelo
+        vehicle.marca + " | " + vehicle.modelo
       }}</mat-card-title>
       <mat-card-subtitle>
-        {{ vehicle?.patente }}
+        {{ vehicle.patente }}
       </mat-card-subtitle>
     </mat-card-header>
     <div class="content-container">
@@ -30,29 +30,29 @@
           <mat-list role="list">
             <mat-list-item role="listitem">
               <strong class="downBold">VIN:</strong>
-              {{ vehicle?.chasis }}
+              {{ vehicle.chasis }}
             </mat-list-item>
             <mat-list-item role="listitem">
               <strong class="downBold">Empresa:</strong>
-              {{ vehicle?.empresa }}
+              {{ vehicle.empresa }}
             </mat-list-item>
             <mat-list-item role="listitem">
               <strong class="downBold">Plan:</strong>
-              {{ vehicle?.plan_contratado }}
+              {{ vehicle.plan_contratado }}
             </mat-list-item>
           </mat-list>
           <mat-list role="list">
             <mat-list-item role="listitem">
               <strong class="downBold">Región:</strong>
-              {{ vehicle?.region }}
+              {{ vehicle.region }}
             </mat-list-item>
             <mat-list-item role="listitem">
               <strong class="downBold">Última RT:</strong>
-              {{ vehicle?.ultima_revision }}
+              {{ vehicle.ultima_revision }}
             </mat-list-item>
             <mat-list-item role="listitem">
               <strong class="downBold">Última mantención:</strong>
-              {{ vehicle?.ultima_mantencion }}
+              {{ vehicle.ultima_mantencion }}
             </mat-list-item>
           </mat-list>
         </div>

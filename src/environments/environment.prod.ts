@@ -1,13 +1,16 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://api.movipro.cl/',
   api: {
+    baseUrl: 'https://api.movipro.cl/',
     auth: {
       getUser: 'auth/byUserId/',
     },
     admin: {
       getAllAccounts: 'admin/accounts/all',
       getInvoicingByAccount: 'admin/invoicing/byAccount',
+    },
+    gps: {
+      getLastStatus: 'gps/last-status',
     },
   },
 };

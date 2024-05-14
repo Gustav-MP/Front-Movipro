@@ -16,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 
 import { GuanteraComponent } from '../guantera/guantera.component';
 import { CommonModule } from '@angular/common';
+import { GpsService } from '../../services/gps/gps.service';
 
 @Component({
   selector: 'app-ficha-vehiculo',
@@ -39,8 +40,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './ficha-vehiculo.component.css',
 })
 export class FichaVehiculoComponent {
-  private _vehicle: Vehicle | null = null;
+  private _vehicle!: Vehicle;
   public disclaimerAccepted = false;
+  public panelOpenState = false;
   public comunas = [
     { name: 'Cerrillos' },
     { name: 'Cerro Navia' },
@@ -78,22 +80,32 @@ export class FichaVehiculoComponent {
   ];
 
   @Input()
-  set vehicle(value: Vehicle | null) {
+  set vehicle(value: Vehicle) {
     this._vehicle = value;
-    this.documents = value?.docs ?? [];
+    this.documents = value.docs ?? [];
+    this.getVehicleLastStatus(this.vehicle.uid);
   }
 
-  get vehicle(): Vehicle | null {
+  get vehicle(): Vehicle {
     return this._vehicle;
   }
-  panelOpenState = false;
 
-  documents: Document[] = this.vehicle?.docs ?? [];
+  public documents: Document[] = this.vehicle?.docs ?? [];
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
+    private gpsService: GpsService,
   ) {}
+
+  async getVehicleLastStatus(unitId: string) {
+    try {
+      const respLastPosition = await this.gpsService.getLastStatus(unitId);
+      console.log('resplast position -->', respLastPosition);
+    } catch (error) {
+      console.error('Error fetching last position:', error);
+    }
+  }
 
   showDisclaimer() {
     const dialogRef = this.dialog.open(DialogContent);

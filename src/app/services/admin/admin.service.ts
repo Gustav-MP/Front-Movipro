@@ -10,7 +10,8 @@ import { Invoicing } from '../../interfaces/admin/invoicing.interface';
   providedIn: 'root',
 })
 export class AdminService {
-  private baseUrl = environment.baseUrl;
+  private baseUrl = environment.api.baseUrl;
+  private apiAdmin = environment.api.admin;
   private options = {
     headers: {
       'Content-Type': 'Application/json',
@@ -20,16 +21,12 @@ export class AdminService {
   constructor(private httpClient: HttpClient) {}
 
   getAllAccounts(): Observable<Account[]> {
-    const apiUrl = this.baseUrl + environment.api.admin.getAllAccounts;
-    return this.httpClient.get<Account[]>(apiUrl, this.options);
+    const urlgetAllAccounts = `${this.baseUrl}${this.apiAdmin.getAllAccounts}`;
+    return this.httpClient.get<Account[]>(urlgetAllAccounts, this.options);
   }
 
   getInvoicingByAccount(id_account: number): Observable<Invoicing> {
-    const apiUrl =
-      this.baseUrl +
-      environment.api.admin.getInvoicingByAccount +
-      '?id_account=' +
-      id_account;
-    return this.httpClient.get<Invoicing>(apiUrl, this.options);
+    const urlgetInvoicing = `${this.baseUrl}${this.apiAdmin.getInvoicingByAccount}?id_account=${id_account}`;
+    return this.httpClient.get<Invoicing>(urlgetInvoicing, this.options);
   }
 }

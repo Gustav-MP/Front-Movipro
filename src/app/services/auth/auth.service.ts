@@ -8,18 +8,18 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = environment.baseUrl;
+  private baseUrl = environment.api.baseUrl;
+  private apiAuth = environment.api.auth;
 
   constructor(private httpClient: HttpClient) {}
 
   getUser(id_user: number): Observable<any> {
-    const apiUrl =
-      this.baseUrl + environment.api.auth.getUser + '?id=' + id_user;
+    const urlgetUser = `${this.baseUrl}${this.apiAuth.getUser}?id=${id_user}`;
     const options = {
       headers: {
         'Content-Type': 'Application/json',
       },
     };
-    return this.httpClient.get(apiUrl, options);
+    return this.httpClient.get(urlgetUser, options);
   }
 }

@@ -1,13 +1,48 @@
 import { Routes } from '@angular/router';
-import { FlotaComponent } from './components/flota/flota.component';
-import { GuanteraComponent } from './components/guantera/guantera.component';
-import { AdminLoginComponent } from './components/admin/login/login.component';
-import { CuentasComponent } from './components/admin/cuentas/cuentas.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { authGuard } from './guards/auth.guard';
+import { LoginLayoutComponent } from './components/layouts/login-layout/login-layout.component';
+import { MainLayoutComponent } from './components/layouts/main-layout/main-layout.component';
+import { AdminLayoutComponent } from './components/layouts/admin-layout/admin-layout.component';
 
 export const routes: Routes = [
-  { path: 'login/admin', component: AdminLoginComponent },
-  { path: 'flota', component: FlotaComponent },
-  { path: 'ficha-vehiculo', component: FlotaComponent },
-  { path: 'guantera', component: GuanteraComponent },
-  { path: 'admin/cuentas', component: CuentasComponent },
+  {
+    path: 'login',
+    component: LoginLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      },
+    ],
+  },
+  {
+    path: '',
+    canActivateChild: [authGuard],
+    component: MainLayoutComponent,
+    children: [
+      {
+        path: 'flota',
+        loadComponent: () =>
+          import('./components/flota/flota.component').then(
+            (m) => m.FlotaComponent,
+          ),
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    canActivateChild: [authGuard],
+    component: AdminLayoutComponent,
+    data: { roles: ['admin'] },
+    children: [
+      {
+        path: 'cuentas',
+        loadComponent: () =>
+          import('./components/admin/cuentas/cuentas.component').then(
+            (m) => m.CuentasComponent,
+          ),
+      },
+    ],
+  },
 ];

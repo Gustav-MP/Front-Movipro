@@ -4,6 +4,7 @@ export const environment = {
     baseUrl: 'http://localhost:3000/',
     auth: {
       getUser: 'auth/byUserId',
+      login: 'auth/login',
     },
     admin: {
       getAllAccounts: 'admin/accounts/all',
@@ -12,5 +13,8 @@ export const environment = {
     gps: {
       getLastStatus: 'gps/last-status',
     },
+  },
+  jwt: {
+    secret: 'AITfjVuLVa6P7KNw8SzT1tHu6PI7Ne0c',
   },
 };

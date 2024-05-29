@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { lastValueFrom } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../environments/environment';
+import { StorageService } from '../storage/storage.service';
+import {
+  Credentials,
+  PayloadJwt,
+  RespLogin,
+} from '../../interfaces/auth/credentials.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -11,15 +17,72 @@ export class AuthService {
   private baseUrl = environment.api.baseUrl;
   private apiAuth = environment.api.auth;
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private storageService: StorageService,
+  ) {}
 
-  getUser(id_user: number): Observable<any> {
-    const urlgetUser = `${this.baseUrl}${this.apiAuth.getUser}?id=${id_user}`;
+  async login(email: string, password: string): Promise<boolean> {
+    const urlLogin = this.baseUrl + this.apiAuth.login;
     const options = {
       headers: {
         'Content-Type': 'Application/json',
       },
     };
-    return this.httpClient.get(urlgetUser, options);
+    const body = {
+      email,
+      password,
+    };
+
+    try {
+      const response = await lastValueFrom(
+        this.httpClient.post<RespLogin>(urlLogin, body, options),
+      );
+      const decodeJwt: PayloadJwt = jwtDecode(response.access_token);
+      const credentials: Credentials = {
+        tkn: response.access_token,
+        iat: decodeJwt.iat,
+        exp: decodeJwt.exp,
+        user: {
+          email: decodeJwt.email,
+          id: decodeJwt.id,
+          id_account: decodeJwt.id_account,
+          name: decodeJwt.name,
+          rol: decodeJwt.rol,
+        },
+      };
+      const savedCredentials = await this.storageService.saveLocalStorage(
+        'credentials',
+        credentials,
+      );
+      return !!savedCredentials;
+    } catch (error) {
+      if (error instanceof HttpErrorResponse) {
+        switch (error.status) {
+          case 400:
+            throw new Error('Las credenciales no son válidas.');
+          case 401:
+            throw new Error('Las credenciales no son válidas.');
+          default:
+            throw new Error(
+              'Error interno. Por favor contacte a su agente Movipro.',
+            );
+        }
+      }
+      throw error;
+    }
+  }
+
+  //This funxx is exclusive for AuthGuard, PLS BE CAREFULLY MTHFCKR!!!
+  async isLogged(): Promise<boolean> {
+    const storaged: Credentials =
+      await this.storageService.getLocalStorage('credentials');
+    const expDate = new Date(storaged.exp * 1000);
+    const currentDate = new Date();
+    if (storaged && expDate >= currentDate) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

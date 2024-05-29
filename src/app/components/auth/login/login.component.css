@@ -23,6 +23,11 @@ button {
   margin-top: 1rem;
 }
 
+.passButton {
+  color: darkgray;
+  margin: 0;
+}
+
 p {
   font-size: large;
   font-weight: 100;

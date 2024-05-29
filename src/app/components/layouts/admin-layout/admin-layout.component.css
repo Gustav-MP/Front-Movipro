@@ -1,0 +1,40 @@
+.sidebar {
+  background-color: #002140;
+}
+
+a {
+  color: #ffffff;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  text-decoration: none;
+}
+
+mat-list-item {
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease;
+}
+
+mat-list-item:hover {
+  border-bottom: 2px solid #ff5a4e;
+}
+
+.selected {
+  color: #ff5a4e;
+  font-weight: 500;
+}
+
+::ng-deep .sidebar > .mat-grid-tile-content {
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.imagen-estilizada {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  background-color: #ffffff;
+  border-radius: 50%; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}

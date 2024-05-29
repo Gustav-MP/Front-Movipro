@@ -77,12 +77,11 @@ export class AuthService {
   async isLogged(): Promise<boolean> {
     const storaged: Credentials =
       await this.storageService.getLocalStorage('credentials');
-    const expDate = new Date(storaged.exp * 1000);
-    const currentDate = new Date();
-    if (storaged && expDate >= currentDate) {
-      return true;
-    } else {
+    if (!storaged) {
       return false;
+    } else {
+      const expDate = new Date(storaged.exp * 1000);
+      return expDate > new Date();
     }
   }
 }

@@ -18,7 +18,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    canActivateChild: [authGuard],
+    canActivate: [authGuard],
     component: MainLayoutComponent,
     children: [
       {
@@ -32,7 +32,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    canActivateChild: [authGuard],
+    canActivate: [authGuard],
     component: AdminLayoutComponent,
     data: { roles: ['admin'] },
     children: [

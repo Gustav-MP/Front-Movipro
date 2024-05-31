@@ -25,7 +25,7 @@
         class="passButton"
         mat-icon-button
         matSuffix
-        (click)="togglePasswordVisibility()"
+        (click)="hidePassword = !hidePassword"
         [attr.aria-label]="'Toggle password visibility'"
         [attr.aria-pressed]="hidePassword"
       >

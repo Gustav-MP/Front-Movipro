@@ -61,8 +61,4 @@ export class LoginComponent {
       }
     }
   }
-
-  togglePasswordVisibility() {
-    this.hidePassword = !this.hidePassword;
-  }
 }

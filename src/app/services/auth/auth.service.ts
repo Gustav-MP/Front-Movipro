@@ -73,7 +73,7 @@ export class AuthService {
     }
   }
 
-  //This funxx is exclusive for AuthGuard, PLS BE CAREFULLY MTHFCKR!!!
+  //isLogged and userRole are exclusive for Guards, PLS BE CAREFULLY MTHFCKR!!!
   async isLogged(): Promise<boolean> {
     const storaged: Credentials =
       await this.storageService.getLocalStorage('credentials');
@@ -82,6 +82,16 @@ export class AuthService {
     } else {
       const expDate = new Date(storaged.exp * 1000);
       return expDate > new Date();
+    }
+  }
+
+  async userRole(): Promise<string> {
+    const storaged: Credentials =
+      await this.storageService.getLocalStorage('credentials');
+    if (!storaged) {
+      return 'noRole';
+    } else {
+      return storaged.user.rol;
     }
   }
 }

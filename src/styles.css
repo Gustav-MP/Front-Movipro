@@ -12,7 +12,8 @@ body {
 }
 
 app-flota,
-app-adminLogin,
+app-dashboard,
+app-login,
 app-cuentas {
   width: 100%;
   height: -webkit-fill-available;

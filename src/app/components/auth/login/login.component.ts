@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-adminLogin',
+  selector: 'app-login',
   standalone: true,
   imports: [
     CommonModule,
@@ -47,12 +47,13 @@ export class LoginComponent {
     this.apiError = false;
     if (this.email.valid && this.password.valid) {
       try {
-        const response = await this.authService.login(
+        const responseRole = await this.authService.login(
           this.email.value!,
           this.password.value!,
         );
-        console.log('Login successful', response);
-        this.router.navigate(['/admin/cuentas']);
+        responseRole === 'admin'
+          ? this.router.navigate(['/admin/cuentas'])
+          : this.router.navigate(['/flota']);
       } catch (error: any) {
         this.errorMessage = error.message || 'Error desconocido';
         this.apiError = true;

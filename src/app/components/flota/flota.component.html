@@ -26,47 +26,26 @@
         <td mat-cell *matCellDef="let element">{{ element.modelo }}</td>
       </ng-container>
 
-      <ng-container matColumnDef="region">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Región</th>
+      <ng-container matColumnDef="proxima_rt">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Próxima RT</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.region }}
+          {{ addYear(element.ultima_rt) | date: "MM-yyyy" }}
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="empresa">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Empresa</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.empresa }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="mantenimiento">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo Mant.</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.mantenimiento }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="proxima_mantencion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Próximo Mant.</th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.proxima_mantencion }}
-        </td>
-      </ng-container>
-
-      <ng-container matColumnDef="status">
+      <ng-container matColumnDef="estado_vehiculo">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
         <td mat-cell *matCellDef="let element" id="statusContainer">
           <div
             id="statusPoint"
             [ngClass]="{
-              'status-color-ok': element.status === 'Ok',
-              'status-color-pending': element.status === 'Pendiente',
-              'status-color-reject': element.status === 'Rechazado'
+              'status-color-ok': element.estado_vehiculo === 'Ok',
+              'status-color-pending': element.estado_vehiculo === 'Pendiente',
+              'status-color-reject': element.estado_vehiculo === 'Rechazado'
             }"
           ></div>
           <p>
-            {{ element.status }}
+            {{ element.estado_vehiculo }}
           </p>
         </td>
       </ng-container>

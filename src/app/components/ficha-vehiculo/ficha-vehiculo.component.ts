@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Vehicle, Document } from '../flota/flota.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,6 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { GuanteraComponent } from '../guantera/guantera.component';
 import { CommonModule } from '@angular/common';
 import { GpsService } from '../../services/gps/gps.service';
+import { Vehicle, Document } from '../../interfaces/vehicles/vehicle';
 
 @Component({
   selector: 'app-ficha-vehiculo',
@@ -83,7 +83,6 @@ export class FichaVehiculoComponent {
   set vehicle(value: Vehicle) {
     this._vehicle = value;
     this.documents = value.docs ?? [];
-    this.getVehicleLastStatus(this.vehicle.uid);
   }
 
   get vehicle(): Vehicle {

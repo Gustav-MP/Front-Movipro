@@ -13,6 +13,12 @@ export const environment = {
     gps: {
       getLastStatus: 'gps/last-status',
     },
+    fleets: {
+      getAllFleets: 'fleets/all',
+    },
+    vehicles: {
+      getByFleet: 'vehicles/byFleetId',
+    },
   },
   jwt: {
     secret: 'JWT_SECRET',

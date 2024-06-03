@@ -22,7 +22,7 @@ export class AuthService {
     private storageService: StorageService,
   ) {}
 
-  async login(email: string, password: string): Promise<boolean> {
+  async login(email: string, password: string): Promise<string> {
     const urlLogin = this.baseUrl + this.apiAuth.login;
     const options = {
       headers: {
@@ -55,7 +55,7 @@ export class AuthService {
         'credentials',
         credentials,
       );
-      return !!savedCredentials;
+      return decodeJwt.rol;
     } catch (error) {
       if (error instanceof HttpErrorResponse) {
         switch (error.status) {

@@ -1,6 +1,13 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { firstValueFrom, lastValueFrom } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  forkJoin,
+  map,
+  switchMap,
+  throwError,
+} from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 import { StorageService } from '../storage/storage.service';
@@ -30,54 +37,52 @@ export class VehiclesService {
     },
   };
 
-  async getAllFleets() {
+  getAllFleets(): Observable<Fleet[]> {
     const urlFleets = this.baseUrl + this.apiFleets.getAllFleets;
-    try {
-      const respFleets = await lastValueFrom(
-        this.httpClient.get<Fleet[]>(urlFleets, this.optionsAuth),
-      );
-      return respFleets;
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        switch (error.status) {
-          case 400:
-            throw new Error('No existen flotas asociadas');
-          case 401:
-            throw new Error('Token expirado, debes hacer loggin');
-          default:
-            throw new Error(
-              'Error interno. Por favor contacte a su agente Movipro.',
-            );
-        }
-      }
-      throw error;
-    }
+    return this.httpClient.get<Fleet[]>(urlFleets, this.optionsAuth).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('error in getAllFleets -->', error);
+        return throwError(() => new Error('Error fetching fleets'));
+      }),
+    );
   }
 
-  async getVehiclesByFleet(fleet_id: number) {
+  getVehiclesByFleet(fleet_id: number): Observable<Vehicle[]> {
     const urlVehiclesByFleet = `${this.baseUrl + this.apiVehicles.getByFleet}?fleet_id=${fleet_id}`;
-
-    try {
-      const respVehicles = await firstValueFrom(
-        this.httpClient.get<Vehicle[]>(urlVehiclesByFleet, this.optionsAuth),
+    return this.httpClient
+      .get<Vehicle[]>(urlVehiclesByFleet, this.optionsAuth)
+      .pipe(
+        catchError((error: HttpErrorResponse) => {
+          console.log('error in getVehiclesByFleet -->', error);
+          return throwError(
+            () => new Error('Error fetching vehicles for fleet'),
+          );
+        }),
       );
-      return respVehicles;
-    } catch (error) {
-      if (error instanceof HttpErrorResponse) {
-        switch (error.status) {
-          case 400:
-            throw new Error(
-              'El usuario no tiene vehiculos o flotas asociados.',
-            );
-          case 401:
-            throw new Error('Token expirado, debes hacer loggin');
-          default:
-            throw new Error(
-              'Error interno. Por favor contacte a su agente Movipro.',
-            );
+  }
+
+  getAllVehicles(): Observable<Vehicle[]> {
+    return this.getAllFleets().pipe(
+      switchMap((fleets) => {
+        if (fleets.length === 0) {
+          return throwError(
+            () => new Error('No hay flotas asociadas al usuario'),
+          );
         }
-      }
-      throw error;
-    }
+        return forkJoin(
+          fleets.map((fleet) => this.getVehiclesByFleet(fleet.id)),
+        ).pipe(
+          map((vehiclesArrays) => vehiclesArrays.flat()),
+          catchError((error) => {
+            console.error('Failed to fetch vehicles:', error);
+            return throwError(() => error);
+          }),
+        );
+      }),
+      catchError((error) => {
+        console.error('Failed during fleet retrieval:', error);
+        return throwError(() => error);
+      }),
+    );
   }
 }

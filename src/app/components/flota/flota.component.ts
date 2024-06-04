@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,6 +14,7 @@ import { FichaVehiculoComponent } from '../ficha-vehiculo/ficha-vehiculo.compone
 import { CommonModule } from '@angular/common';
 import { VehiclesService } from '../../services/clients/vehicles.service';
 import { Vehicle } from '../../interfaces/vehicles/vehicle';
+import { Subscription } from 'rxjs';
 
 let ELEMENT_DATA: Vehicle[] = [];
 
@@ -26,7 +33,7 @@ let ELEMENT_DATA: Vehicle[] = [];
   templateUrl: './flota.component.html',
   styleUrl: './flota.component.css',
 })
-export class FlotaComponent implements AfterViewInit, OnInit {
+export class FlotaComponent implements AfterViewInit, OnInit, OnDestroy {
   displayedColumns: string[] = [
     'patente',
     'marca',
@@ -38,6 +45,8 @@ export class FlotaComponent implements AfterViewInit, OnInit {
   selectedVehicle: Vehicle | null = null;
   selectedRowIndex: number | null = null;
 
+  private subscriptions = new Subscription();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -45,14 +54,28 @@ export class FlotaComponent implements AfterViewInit, OnInit {
     this.dataSource = new MatTableDataSource(ELEMENT_DATA);
   }
   async ngOnInit(): Promise<void> {
-    const respFleets = await this.vehicleService.getAllFleets();
-    if (respFleets.length === 1) {
-      const vehicles = await this.vehicleService.getVehiclesByFleet(
-        respFleets[0].id,
-      );
-      console.log('vehicles -->', vehicles);
-      this.dataSource.data = vehicles; // Actualiza los datos del dataSource
-    }
+    this.subscriptions.add(
+      this.vehicleService.getAllFleets().subscribe({
+        next: (fleets) => {
+          if (fleets.length > 0) {
+            this.loadVehicles(fleets[0].id);
+          }
+        },
+        error: (error) => console.error('Error fetching fleets:', error),
+      }),
+    );
+  }
+
+  loadVehicles(fleetId: number) {
+    this.subscriptions.add(
+      this.vehicleService.getVehiclesByFleet(fleetId).subscribe({
+        next: (vehicles) => {
+          this.dataSource.data = vehicles;
+          console.log('vehicles -->', vehicles);
+        },
+        error: (error) => console.error('Error fetching vehicles:', error),
+      }),
+    );
   }
 
   ngAfterViewInit() {
@@ -76,5 +99,9 @@ export class FlotaComponent implements AfterViewInit, OnInit {
   addYear(date: Date): Date {
     const formattedDate = new Date(date);
     return new Date(formattedDate.setFullYear(formattedDate.getFullYear() + 1));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

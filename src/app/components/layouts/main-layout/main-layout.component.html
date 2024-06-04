@@ -5,22 +5,12 @@
     </a>
     <mat-list role="list">
       <mat-list-item role="listitem">
+        <a [routerLink]="['/dashboard']" routerLinkActive="selected">
+          Dashboard
+        </a>
+      </mat-list-item>
+      <mat-list-item role="listitem">
         <a [routerLink]="['/flota']" routerLinkActive="selected"> Mi Flota </a>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <a [routerLink]="['/cuenta']" routerLinkActive="selected">
-          Mi Cuenta
-        </a>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <a [routerLink]="['/vehiculos']" routerLinkActive="selected">
-          Mis Vehículos
-        </a>
-      </mat-list-item>
-      <mat-list-item role="listitem">
-        <a [routerLink]="['/documentos']" routerLinkActive="selected">
-          Mi Documentos
-        </a>
       </mat-list-item>
       <mat-list-item role="listitem">
         <a [routerLink]="['/alertas']" routerLinkActive="selected">

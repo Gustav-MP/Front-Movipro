@@ -20,21 +20,40 @@ export const routes: Routes = [
   {
     path: '',
     canActivate: [authGuard, roleGuard],
+    canActivateChild: [authGuard, roleGuard],
     component: MainLayoutComponent,
     data: { roles: ['client'] },
     children: [
+      {
+        path: 'dashboard',
+        loadComponent: () =>
+          import('./components/dashboard/dashboard.component').then(
+            (m) => m.DashboardComponent,
+          ),
+        data: { roles: ['client'] },
+      },
       {
         path: 'flota',
         loadComponent: () =>
           import('./components/flota/flota.component').then(
             (m) => m.FlotaComponent,
           ),
+        data: { roles: ['client'] },
+      },
+      {
+        path: 'alertas',
+        loadComponent: () =>
+          import('./components/alertas/alertas.component').then(
+            (m) => m.AlertasComponent,
+          ),
+        data: { roles: ['client'] },
       },
     ],
   },
   {
     path: 'admin',
     canActivate: [authGuard, roleGuard],
+    canActivateChild: [authGuard, roleGuard],
     component: AdminLayoutComponent,
     data: { roles: ['admin'] },
     children: [
@@ -44,6 +63,7 @@ export const routes: Routes = [
           import('./components/admin/cuentas/cuentas.component').then(
             (m) => m.CuentasComponent,
           ),
+        data: { roles: ['admin'] },
       },
     ],
   },

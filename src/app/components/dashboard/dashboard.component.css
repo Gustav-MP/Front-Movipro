@@ -1,0 +1,44 @@
+h1 {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: 500;
+}
+
+.father-container {
+  margin: 2rem;
+}
+
+mat-grid-tile {
+  background: #002140;
+  border-radius: 3rem;
+}
+
+::ng-deep .mat-grid-tile-content {
+  flex-direction: column;
+}
+
+.resume_card {
+  font-family: "Bai Jamjuree", sans-serif;
+  color: #ffffff;
+  text-align: center;
+}
+
+.big_number {
+  color: #ff5a4e;
+  font-size: 2.2rem;
+  font-weight: 500;
+  font-family: "Bai Jamjuree", sans-serif;
+  margin: 1rem;
+}
+
+.charts {
+  margin-top: 2em;
+}
+
+.chart-container {
+  margin: 0rem 1rem;
+  width: 100%;
+}
+
+.chart_maintenance {
+  background-color: transparent;
+}

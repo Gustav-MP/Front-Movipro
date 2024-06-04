@@ -53,7 +53,7 @@ export class LoginComponent {
         );
         responseRole === 'admin'
           ? this.router.navigate(['/admin/cuentas'])
-          : this.router.navigate(['/flota']);
+          : this.router.navigate(['/dashboard']);
       } catch (error: any) {
         this.errorMessage = error.message || 'Error desconocido';
         this.apiError = true;

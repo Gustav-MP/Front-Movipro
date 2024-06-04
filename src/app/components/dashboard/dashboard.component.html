@@ -1,0 +1,66 @@
+<div *ngIf="userData" class="father-container">
+  <h1>Bienvenido {{ userData.name }}</h1>
+
+  <mat-grid-list class="resumes" cols="4" gutterSize="2em" rowHeight="5:4">
+    <mat-grid-tile
+      class="resume_card mat-elevation-z5"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+      <div class="big_number">{{ animatedNumVehicles | number: "1.0-0" }}</div>
+      <p>
+        vehiculos <br />
+        registrados
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile
+      class="resume_card mat-elevation-z5"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+      <div class="big_number">{{ animatedNumAlerts | number: "1.0-0" }}</div>
+      <p>
+        alertas <br />
+        pendientes
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile
+      class="resume_card mat-elevation-z5"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+      <div class="big_number">{{ animatedNumServices | number: "1.0-0" }}</div>
+      <p>
+        servicios <br />
+        solicitados
+      </p>
+    </mat-grid-tile>
+    <mat-grid-tile
+      class="resume_card mat-elevation-z5"
+      [colspan]="1"
+      [rowspan]="1"
+    >
+      <div class="big_number">${{ animatedNumSavings | number: "1.1-1" }}</div>
+      <p>
+        millones <br />
+        ahorrados
+      </p>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list class="charts mat-elevation-z5" cols="1" rowHeight="2:1">
+    <mat-grid-tile class="chart_maintenance" [colspan]="1">
+      <div class="chart-container">
+        <apx-chart
+          *ngIf="chartOptions && chartOptions.series"
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [title]="chartOptions.title"
+          [stroke]="chartOptions.stroke"
+        >
+        </apx-chart>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

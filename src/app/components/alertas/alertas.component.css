@@ -1,0 +1,13 @@
+h1 {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-weight: 500;
+}
+
+.father-container {
+  margin: 2rem;
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper {
+  font-family: "Bai Jamjuree", sans-serif;
+  margin-top: 1rem;
+}

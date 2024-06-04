@@ -1,0 +1,32 @@
+<div class="father-container">
+  <h1>Alertas</h1>
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div
+          matBadge="2"
+          matBadgeOverlap="false"
+          matBadgeColor="accent"
+          class="demo-section"
+        >
+          Pendientes
+        </div>
+      </ng-template>
+      No tienes alertas pendientes.
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <div
+          matBadge="3"
+          matBadgeOverlap="false"
+          matBadgeColor="warn"
+          class="demo-section"
+        >
+          Vencidas
+        </div>
+      </ng-template>
+      No tienes alertas atrasadas.
+    </mat-tab>
+    <mat-tab label="Cerradas"> No tienes alertas cerradas. </mat-tab>
+  </mat-tab-group>
+</div>

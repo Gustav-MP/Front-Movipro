@@ -22,7 +22,7 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     canActivateChild: [authGuard, roleGuard],
     component: MainLayoutComponent,
-    data: { roles: ['client'] },
+    data: { roles: ['client'], redirect: ['dashboard'] },
     children: [
       {
         path: 'dashboard',

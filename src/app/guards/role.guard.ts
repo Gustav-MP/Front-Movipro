@@ -15,14 +15,24 @@ export const roleGuard: CanActivateFn = async (
   const router = inject(Router);
 
   const expectedRoles = route.data['roles'] as Array<string>;
+  const redirectPath = route.data['redirect'];
 
   try {
     const userRole = await authService.userRole();
     const hasRole = expectedRoles.includes(userRole);
+
     if (!hasRole) {
       router.navigate(['/login']);
     }
-    return hasRole;
+
+    if (
+      redirectPath &&
+      state.url !== router.createUrlTree(redirectPath).toString()
+    ) {
+      return router.createUrlTree(redirectPath);
+    }
+
+    return true;
   } catch (error) {
     console.error('Error checking roles:', error);
     router.navigate(['/login']);

@@ -21,4 +21,8 @@ export class StorageService {
     const data = _data ? JSON.parse(_data) : null;
     return data;
   }
+
+  deleteLocalStorage() {
+    localStorage.clear();
+  }
 }

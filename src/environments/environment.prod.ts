@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: {
-    baseUrl: 'https://api.movipro.cl/',
+    baseUrl: 'http://localhost:3000/',
     auth: {
       getUser: 'auth/byUserId',
       login: 'auth/login',
@@ -17,11 +17,12 @@ export const environment = {
       getByUser: 'fleets/byUser',
     },
     vehicles: {
-      getByFleet: 'vehicles/byFleet',
       countByUser: 'vehicles/count/byUser',
+      getByFleet: 'vehicles/byFleet',
     },
     alerts: {
       countByUser: 'alerts/count/byUser',
+      countByStatus: 'alerts/count/byStatus',
       getByUser: 'alerts/byUser',
     },
     services: {

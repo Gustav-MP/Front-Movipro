@@ -13,7 +13,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { FichaVehiculoComponent } from '../ficha-vehiculo/ficha-vehiculo.component';
 import { CommonModule } from '@angular/common';
 import { VehiclesService } from '../../services/clients/vehicles.service';
-import { Vehicle } from '../../interfaces/vehicles/vehicle';
+import { Vehicle } from '../../interfaces/vehicles/vehicle.interface';
 import { Subscription } from 'rxjs';
 
 let ELEMENT_DATA: Vehicle[] = [];

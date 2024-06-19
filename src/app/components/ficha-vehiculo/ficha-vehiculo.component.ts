@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { GuanteraComponent } from '../guantera/guantera.component';
 import { CommonModule } from '@angular/common';
 import { GpsService } from '../../services/gps/gps.service';
-import { Vehicle, Document } from '../../interfaces/vehicles/vehicle';
+import { Vehicle, Document } from '../../interfaces/vehicles/vehicle.interface';
 
 @Component({
   selector: 'app-ficha-vehiculo',

@@ -1,32 +1,59 @@
 <div class="father-container">
   <h1>Alertas</h1>
-  <mat-tab-group>
+  <mat-tab-group (selectedIndexChange)="onTabChange($event)">
     <mat-tab>
       <ng-template mat-tab-label>
         <div
-          matBadge="2"
+          matBadge="{{ pendingAlerts.badge.count }}"
           matBadgeOverlap="false"
-          matBadgeColor="accent"
+          [matBadgeColor]="pendingAlerts.badge.color"
           class="demo-section"
         >
           Pendientes
         </div>
       </ng-template>
-      No tienes alertas pendientes.
+      <ng-container *ngIf="pendingAlerts.list.length > 0; else noPendingAlerts">
+        <app-lista-alertas [alerts]="pendingAlerts.list"></app-lista-alertas>
+      </ng-container>
+      <ng-template #noPendingAlerts>
+        <p>No tienes alertas pendientes.</p>
+      </ng-template>
     </mat-tab>
     <mat-tab>
       <ng-template mat-tab-label>
         <div
-          matBadge="3"
+          matBadge="{{ expiredAlerts.badge.count }}"
           matBadgeOverlap="false"
-          matBadgeColor="warn"
+          [matBadgeColor]="expiredAlerts.badge.color"
           class="demo-section"
         >
           Vencidas
         </div>
       </ng-template>
-      No tienes alertas atrasadas.
+      <ng-container *ngIf="expiredAlerts.list.length > 0; else noExpiredAlerts">
+        <app-lista-alertas [alerts]="expiredAlerts.list"></app-lista-alertas>
+      </ng-container>
+      <ng-template #noExpiredAlerts>
+        <p>No tienes alertas vencidas.</p>
+      </ng-template>
     </mat-tab>
-    <mat-tab label="Cerradas"> No tienes alertas cerradas. </mat-tab>
+    <mat-tab label="Cerradas">
+      <ng-template mat-tab-label>
+        <div
+          matBadge="{{ closedAlerts.badge.count }}"
+          matBadgeOverlap="false"
+          matBadgeColor="primary"
+          class="demo-section"
+        >
+          Cerradas
+        </div>
+      </ng-template>
+      <ng-container *ngIf="closedAlerts.list.length > 0; else noClosedAlerts">
+        <app-lista-alertas [alerts]="closedAlerts.list"></app-lista-alertas>
+      </ng-container>
+      <ng-template #noClosedAlerts>
+        <p>No tienes alertas pendientes.</p>
+      </ng-template>
+    </mat-tab>
   </mat-tab-group>
 </div>

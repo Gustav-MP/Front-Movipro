@@ -1,0 +1,32 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="vehicle">
+    <mat-header-cell *matHeaderCellDef> Vehiculo </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.vehiculo.id }} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="service">
+    <mat-header-cell *matHeaderCellDef> Servicio </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.servicio.id }} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="date_end">
+    <mat-header-cell *matHeaderCellDef> Fecha Limite </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.alerta.fecha_termino }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="description">
+    <mat-header-cell *matHeaderCellDef> Descripcion </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{ element.alerta.descripcion }}
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>

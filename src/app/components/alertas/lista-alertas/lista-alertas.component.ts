@@ -30,7 +30,6 @@ export class ListaAlertasComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.dataSource = this.alerts;
-    console.log('datasourse lista -->', this.dataSource);
   }
 
   ngOnChanges(changes: SimpleChanges): void {

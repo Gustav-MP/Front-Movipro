@@ -11,3 +11,19 @@ h1 {
   font-family: "Bai Jamjuree", sans-serif;
   margin-top: 1rem;
 }
+
+::ng-deep .mat-badge {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 1rem;
+}
+
+::ng-deep .mat-mdc-header-row {
+  font-family: "Bai Jamjuree", sans-serif !important;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+}
+
+::ng-deep .mat-mdc-row,
+.mdc-data-table__content {
+  font-family: "Bai Jamjuree", sans-serif !important;
+}

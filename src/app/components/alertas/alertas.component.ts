@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { firstValueFrom } from 'rxjs';
+
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatBadgeModule } from '@angular/material/badge';
 
 import { AlertsService } from '../../services/clients/alerts.service';
-import { Subscription, firstValueFrom } from 'rxjs';
 import {
   Alerts,
   RespApiAlerts,
@@ -44,7 +45,6 @@ export class AlertasComponent implements OnInit {
       );
       this.separateAlertsByStatus(alerts);
       this.dataSource = this.pendingAlerts.list;
-      console.log('oninit datasource -->', this.dataSource);
     } catch (error) {
       console.error('Failed to fetch alerts', error);
     }
@@ -72,18 +72,14 @@ export class AlertasComponent implements OnInit {
   }
 
   public onTabChange(index: number): void {
-    console.log('event tab --->', index);
     switch (index) {
       case 0:
-        console.log('Pendientes tab activated', this.pendingAlerts);
         this.dataSource = this.pendingAlerts.list;
         break;
       case 1:
-        console.log('Vencidas tab activated', this.expiredAlerts);
         this.dataSource = this.expiredAlerts.list;
         break;
       case 2:
-        console.log('Cerradas tab activated', this.closedAlerts);
         this.dataSource = this.closedAlerts.list;
         break;
     }

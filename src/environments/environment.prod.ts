@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   api: {
-    baseUrl: 'http://localhost:3000/',
+    baseUrl: 'https://api.movipro.cl/',
     auth: {
       getUser: 'auth/byUserId',
       login: 'auth/login',

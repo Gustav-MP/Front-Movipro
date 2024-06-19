@@ -3,7 +3,7 @@ export const environment = {
   api: {
     baseUrl: 'https://api.movipro.cl/',
     auth: {
-      getUser: 'auth/byUserId/',
+      getUser: 'auth/byUserId',
       login: 'auth/login',
     },
     admin: {
@@ -14,10 +14,20 @@ export const environment = {
       getLastStatus: 'gps/last-status',
     },
     fleets: {
-      getAllFleets: 'fleets/all',
+      getByUser: 'fleets/byUser',
     },
     vehicles: {
-      getByFleet: 'vehicles/byFleetId',
+      getByFleet: 'vehicles/byFleet',
+      countByUser: 'vehicles/count/byUser',
+    },
+    alerts: {
+      countByUser: 'alerts/count/byUser',
+      getByUser: 'alerts/byUser',
+    },
+    services: {
+      countByUser: 'services/count/byUser',
+      getByVehicle: 'services/byVehicle',
+      getByFleet: 'services/byFleet',
     },
   },
   jwt: {

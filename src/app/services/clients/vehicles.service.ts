@@ -12,20 +12,20 @@ import {
 import { environment } from '../../../environments/environment';
 import { StorageService } from '../storage/storage.service';
 import { Credentials } from '../../interfaces/auth/credentials.interface';
-import { Fleet, Vehicle } from '../../interfaces/vehicles/vehicle';
+import { Fleet, Vehicle } from '../../interfaces/vehicles/vehicle.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VehiclesService {
-  private baseUrl = environment.api.baseUrl;
-  private apiFleets = environment.api.fleets;
-  private apiVehicles = environment.api.vehicles;
-
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
   ) {}
+
+  private baseUrl = environment.api.baseUrl;
+  private apiFleets = environment.api.fleets;
+  private apiVehicles = environment.api.vehicles;
 
   private credentials: Credentials =
     this.storageService.getLocalStorage('credentials');
@@ -38,7 +38,7 @@ export class VehiclesService {
   };
 
   getAllFleets(): Observable<Fleet[]> {
-    const urlFleets = this.baseUrl + this.apiFleets.getAllFleets;
+    const urlFleets = this.baseUrl + this.apiFleets.getByUser;
     return this.httpClient.get<Fleet[]>(urlFleets, this.optionsAuth).pipe(
       catchError((error: HttpErrorResponse) => {
         console.log('error in getAllFleets -->', error);
@@ -82,6 +82,16 @@ export class VehiclesService {
       catchError((error) => {
         console.error('Failed during fleet retrieval:', error);
         return throwError(() => error);
+      }),
+    );
+  }
+
+  countAllVehicles(): Observable<number> {
+    const urlCountVehicles = `${this.baseUrl + this.apiVehicles.countByUser}`;
+    return this.httpClient.get<number>(urlCountVehicles, this.optionsAuth).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('error in countAllVehicles -->', error);
+        return throwError(() => new Error('Error when count vehicles'));
       }),
     );
   }

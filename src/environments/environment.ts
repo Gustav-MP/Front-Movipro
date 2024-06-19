@@ -14,10 +14,21 @@ export const environment = {
       getLastStatus: 'gps/last-status',
     },
     fleets: {
-      getAllFleets: 'fleets/all',
+      getByUser: 'fleets/byUser',
     },
     vehicles: {
-      getByFleet: 'vehicles/byFleetId',
+      countByUser: 'vehicles/count/byUser',
+      getByFleet: 'vehicles/byFleet',
+    },
+    alerts: {
+      countByUser: 'alerts/count/byUser',
+      countByStatus: 'alerts/count/byStatus',
+      getByUser: 'alerts/byUser',
+    },
+    services: {
+      countByUser: 'services/count/byUser',
+      getByVehicle: 'services/byVehicle',
+      getByFleet: 'services/byFleet',
     },
   },
   jwt: {

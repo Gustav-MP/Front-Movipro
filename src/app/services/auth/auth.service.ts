@@ -51,6 +51,7 @@ export class AuthService {
           rol: decodeJwt.rol,
         },
       };
+      await this.storageService.deleteLocalStorage();
       const savedCredentials = await this.storageService.saveLocalStorage(
         'credentials',
         credentials,

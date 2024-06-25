@@ -1,4 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ApexPlotOptions, ApexStroke, NgApexchartsModule } from 'ng-apexcharts';
 import {
@@ -8,8 +10,6 @@ import {
   ApexXAxis,
   ApexTitleSubtitle,
 } from 'ng-apexcharts';
-import { CommonModule } from '@angular/common';
-import { Observable, Subscription } from 'rxjs';
 
 import { StorageService } from '../../services/storage/storage.service';
 import {
@@ -42,7 +42,7 @@ type NumericPropertyKeys =
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   userData!: UserCredentials;
   animatedNumVehicles: number = 0;
   animatedNumAlerts: number = 0;
@@ -51,7 +51,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   @ViewChild('chart') chart: ChartComponent | undefined;
   public chartOptions: ChartOptions;
-  private subscriptions: Subscription = new Subscription();
 
   constructor(
     private storageService: StorageService,
@@ -67,34 +66,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
       await this.storageService.getLocalStorage('credentials');
     this.userData = credentialsData.user;
 
-    this.subscribeToService(
-      this.vehiclesService.countAllVehicles(),
-      'animatedNumVehicles',
-    );
-    this.subscribeToService(
-      this.alertsService.countByStatus('pendiente'),
-      'animatedNumAlerts',
-    );
-    this.subscribeToService(
-      this.servicesService.countAllServices(),
-      'animatedNumServices',
-    );
-    this.animateNumbers('animatedNumSavings', 1.3);
-  }
+    try {
+      const countVehicles = await firstValueFrom(
+        this.vehiclesService.countAllVehicles(),
+      );
+      const countPendingAlerts = await firstValueFrom(
+        this.alertsService.countByStatus('pendiente'),
+      );
+      const countServices = await firstValueFrom(
+        this.servicesService.countAllServices(),
+      );
 
-  private subscribeToService(
-    service$: Observable<number>,
-    propertyToAnimate: NumericPropertyKeys,
-  ) {
-    this.subscriptions.add(
-      service$.subscribe({
-        next: (count: number) => {
-          this.animateNumbers(propertyToAnimate, count);
-        },
-        error: (error: Error) =>
-          console.error(`Failed when counting ${propertyToAnimate}`, error),
-      }),
-    );
+      this.animateNumbers('animatedNumVehicles', countVehicles);
+      this.animateNumbers('animatedNumAlerts', countPendingAlerts);
+      this.animateNumbers('animatedNumServices', countServices);
+      this.animateNumbers('animatedNumSavings', 1.3);
+    } catch (error) {
+      console.error('Error when count:', error);
+    }
   }
 
   private animateNumbers(
@@ -161,9 +150,5 @@ export class DashboardComponent implements OnInit, OnDestroy {
         categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
       },
     };
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 }

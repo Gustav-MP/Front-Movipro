@@ -22,7 +22,7 @@ export class StorageService {
     return data;
   }
 
-  deleteLocalStorage() {
+  async deleteLocalStorage() {
     localStorage.clear();
   }
 }

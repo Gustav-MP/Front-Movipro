@@ -1,3 +1,5 @@
+import { Glovebox } from '../gloveboxes/glovebox.interface';
+
 export interface Vehicle {
   id: number;
   patente: string;
@@ -9,6 +11,9 @@ export interface Vehicle {
   empresa_contrato: string;
   vin: string;
   ultima_rt: Date;
+  proxima_rt: Date;
+  ultima_gases: Date;
+  proxima_gases: Date;
   ultima_mantencion: Date;
   valor_compra: number;
   valor_mercado: number;
@@ -17,17 +22,11 @@ export interface Vehicle {
   valor_contrato: number;
   fecha_inicio_contrato: Date;
   fecha_termino_contrato: Date;
-  docs: Document[];
+  glovebox: Glovebox;
 }
 
 export interface Fleet {
   id: number;
   nombre: string;
   descripcion: string;
-}
-
-export interface Document {
-  nombre: string;
-  url: string;
-  fecha: string;
 }

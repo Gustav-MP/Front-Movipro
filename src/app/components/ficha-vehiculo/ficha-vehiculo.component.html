@@ -102,29 +102,36 @@
               </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-list class="documents-container">
-              @for (doc of documents; track doc) {
-                @if (doc.url !== "") {
-                  <a class="document-link" href="{{ doc.url }}" target="_blank">
-                    <mat-list-item>
-                      <mat-icon matListItemIcon>note</mat-icon>
-                      <div matListItemTitle>{{ doc.nombre }}</div>
-                      <div matListItemLine>{{ doc.fecha }}</div>
+              @if (glovebox) {
+                @for (doc of glovebox.documents; track doc) {
+                  @if (doc.nombre) {
+                    <mat-list-item
+                      class="document-link"
+                      (click)="downloadDocument(doc.url, doc.nombre)"
+                    >
+                      <mat-icon matListItemIcon>cloud_done</mat-icon>
+                      <div matListItemTitle>{{ doc.tipo }}</div>
+                      <div matListItemLine>
+                        {{ doc.fecha_carga | date: "dd-MM-yyyy" }}
+                      </div>
                     </mat-list-item>
-                  </a>
-                } @else {
-                  <mat-list-item
-                    class="document-link"
-                    (click)="
-                      showToast(
-                        'Este vehiculo no tiene este tipo de documento.'
-                      )
-                    "
-                  >
-                    <mat-icon matListItemIcon>note</mat-icon>
-                    <div matListItemTitle>{{ doc.nombre }}</div>
-                    <div matListItemLine>{{ doc.fecha }}</div>
-                  </mat-list-item>
+                  } @else {
+                    <mat-list-item
+                      class="document-link"
+                      (click)="
+                        showToast(
+                          'Este vehiculo no tiene este tipo de documento.'
+                        )
+                      "
+                    >
+                      <mat-icon matListItemIcon>cloud_off</mat-icon>
+                      <div matListItemTitle>{{ doc.tipo }}</div>
+                      <div matListItemLine>Documento pendiente</div>
+                    </mat-list-item>
+                  }
                 }
+              } @else {
+                <p>Sin documentos</p>
               }
             </mat-list>
           </mat-expansion-panel>

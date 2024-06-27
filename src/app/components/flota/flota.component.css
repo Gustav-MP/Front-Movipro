@@ -11,6 +11,10 @@ table {
   width: 100%;
 }
 
+::ng-deep .mat-mdc-header-row {
+  font-family: "Bai Jamjuree", sans-serif !important;
+}
+
 .mat-mdc-form-field {
   font-size: 14px;
   width: 100%;
@@ -18,6 +22,7 @@ table {
 
 .mat-mdc-row {
   cursor: pointer;
+  font-family: "Bai Jamjuree", sans-serif !important;
 }
 
 .mat-mdc-row.active {

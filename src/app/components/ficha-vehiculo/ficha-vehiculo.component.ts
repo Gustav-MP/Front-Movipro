@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { lastValueFrom } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,9 +16,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 
 import { GuanteraComponent } from '../guantera/guantera.component';
-import { CommonModule } from '@angular/common';
 import { GpsService } from '../../services/gps/gps.service';
-import { Vehicle, Document } from '../../interfaces/vehicles/vehicle.interface';
+import { GloveboxesService } from '../../services/clients/gloveboxes.service';
+
+import { Vehicle } from '../../interfaces/vehicles/vehicle.interface';
+import { Glovebox } from '../../interfaces/gloveboxes/glovebox.interface';
 
 @Component({
   selector: 'app-ficha-vehiculo',
@@ -82,25 +86,48 @@ export class FichaVehiculoComponent {
   @Input()
   set vehicle(value: Vehicle) {
     this._vehicle = value;
-    this.documents = value.docs ?? [];
+    this.getGlovebox(value.id);
   }
 
   get vehicle(): Vehicle {
     return this._vehicle;
   }
 
-  public documents: Document[] = this.vehicle?.docs ?? [];
+  public glovebox!: Glovebox;
 
   constructor(
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private gpsService: GpsService,
+    private gloveboxService: GloveboxesService,
   ) {}
 
   async getVehicleLastStatus(unitId: string) {
     try {
       const respLastPosition = await this.gpsService.getLastStatus(unitId);
       console.log('resplast position -->', respLastPosition);
+    } catch (error) {
+      console.error('Error fetching last position:', error);
+    }
+  }
+
+  async getGlovebox(vehicleId: number) {
+    try {
+      this.glovebox = await lastValueFrom(
+        this.gloveboxService.getGloveboxByVehicle(vehicleId),
+      );
+    } catch (error) {
+      console.error('Error fetching last position:', error);
+    }
+  }
+
+  async downloadDocument(pathDoc: string, nameDoc: string) {
+    try {
+      const docUrl = await lastValueFrom(
+        this.gloveboxService.getFile(pathDoc, nameDoc),
+      );
+      console.log('docurl --->', docUrl.urlFile);
+      window.open(docUrl.urlFile, '_blank');
     } catch (error) {
       console.error('Error fetching last position:', error);
     }

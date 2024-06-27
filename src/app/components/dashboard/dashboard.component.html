@@ -7,11 +7,17 @@
       [colspan]="1"
       [rowspan]="1"
     >
-      <div class="big_number">{{ animatedNumVehicles | number: "1.0-0" }}</div>
-      <p>
-        vehiculos <br />
-        registrados
-      </p>
+      @if (animatedNumVehicles > 0) {
+        <div class="big_number">
+          {{ animatedNumVehicles | number: "1.0-0" }}
+        </div>
+        <p>
+          vehiculos <br />
+          registrados
+        </p>
+      } @else {
+        <p>Sin datos</p>
+      }
     </mat-grid-tile>
     <mat-grid-tile
       class="resume_card mat-elevation-z5"
@@ -40,17 +46,24 @@
       [colspan]="1"
       [rowspan]="1"
     >
-      <div class="big_number">${{ animatedNumSavings | number: "1.1-1" }}</div>
-      <p>
-        millones <br />
-        ahorrados
-      </p>
+      @if (animatedNumSavings > 0) {
+        <div class="big_number">
+          ${{ animatedNumSavings | number: "1.1-1" }}
+        </div>
+        <p>
+          millones <br />
+          ahorrados
+        </p>
+      } @else {
+        <p>Sin datos</p>
+      }
     </mat-grid-tile>
   </mat-grid-list>
 
   <mat-grid-list class="charts mat-elevation-z5" cols="1" rowHeight="2:1">
     <mat-grid-tile class="chart_maintenance" [colspan]="1">
-      <div class="chart-container">
+      <div class="chart-container blur-container">
+        <div class="blur-overlay"></div>
         <apx-chart
           *ngIf="chartOptions && chartOptions.series"
           [series]="chartOptions.series"
@@ -62,6 +75,7 @@
         >
         </apx-chart>
       </div>
+      <div class="overlay-text">Próximamente tus datos estarán aquí</div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

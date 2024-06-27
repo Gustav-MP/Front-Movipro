@@ -20,6 +20,10 @@ export const environment = {
       countByUser: 'vehicles/count/byUser',
       getByFleet: 'vehicles/byFleet',
     },
+    glovebox: {
+      getByType: 'glovebox',
+      getFile: 'glovebox/file',
+    },
     alerts: {
       countByUser: 'alerts/count/byUser',
       countByStatus: 'alerts/count/byStatus',

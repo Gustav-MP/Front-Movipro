@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
       this.animateNumbers('animatedNumVehicles', countVehicles);
       this.animateNumbers('animatedNumAlerts', countPendingAlerts);
       this.animateNumbers('animatedNumServices', countServices);
-      this.animateNumbers('animatedNumSavings', 1.3);
+      this.animateNumbers('animatedNumSavings', 0);
     } catch (error) {
       console.error('Error when count:', error);
     }
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
         height: '400',
         type: 'bar',
         toolbar: {
-          show: true,
+          show: false,
         },
       },
       title: {

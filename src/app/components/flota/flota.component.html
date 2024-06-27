@@ -29,7 +29,7 @@
       <ng-container matColumnDef="proxima_rt">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Próxima RT</th>
         <td mat-cell *matCellDef="let element">
-          {{ addYear(element.ultima_rt) | date: "MM-yyyy" }}
+          {{ element.proxima_rt | date: "MM-yyyy" }}
         </td>
       </ng-container>
 

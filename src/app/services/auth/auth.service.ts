@@ -52,10 +52,7 @@ export class AuthService {
         },
       };
       await this.storageService.deleteLocalStorage();
-      const savedCredentials = await this.storageService.saveLocalStorage(
-        'credentials',
-        credentials,
-      );
+      await this.storageService.saveLocalStorage('credentials', credentials);
       return decodeJwt.rol;
     } catch (error) {
       if (error instanceof HttpErrorResponse) {

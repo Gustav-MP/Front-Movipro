@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, tap } from 'rxjs';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -14,13 +14,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { GuanteraComponent } from '../guantera/guantera.component';
 import { GpsService } from '../../services/gps/gps.service';
 import { GloveboxesService } from '../../services/clients/gloveboxes.service';
 
 import { Vehicle } from '../../interfaces/vehicles/vehicle.interface';
-import { Glovebox } from '../../interfaces/gloveboxes/glovebox.interface';
+import {
+  Document,
+  Glovebox,
+} from '../../interfaces/gloveboxes/glovebox.interface';
+import { SpinnerComponent } from '../resources/spinner/spinner.component';
 
 @Component({
   selector: 'app-ficha-vehiculo',
@@ -29,6 +34,7 @@ import { Glovebox } from '../../interfaces/gloveboxes/glovebox.interface';
   imports: [
     CommonModule,
     GuanteraComponent,
+    SpinnerComponent,
     MatButtonModule,
     MatCardModule,
     MatListModule,
@@ -39,6 +45,7 @@ import { Glovebox } from '../../interfaces/gloveboxes/glovebox.interface';
     MatFormFieldModule,
     MatIconModule,
     MatSelectModule,
+    MatTooltipModule,
   ],
   templateUrl: './ficha-vehiculo.component.html',
   styleUrl: './ficha-vehiculo.component.css',
@@ -47,6 +54,8 @@ export class FichaVehiculoComponent {
   private _vehicle!: Vehicle;
   public disclaimerAccepted = false;
   public panelOpenState = false;
+  public showSpinner = false;
+  public mensajeSpinner = 'Subiendo archivo';
   public comunas = [
     { name: 'Cerrillos' },
     { name: 'Cerro Navia' },
@@ -82,6 +91,8 @@ export class FichaVehiculoComponent {
     { name: 'Santiago' },
     { name: 'Vitacura' },
   ];
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
 
   @Input()
   set vehicle(value: Vehicle) {
@@ -133,6 +144,49 @@ export class FichaVehiculoComponent {
     }
   }
 
+  onFileSelected(event: any, doc: any) {
+    const file: File = event.target.files[0];
+    const maxSizeInBytes = 2 * 1024 * 1024;
+
+    if (
+      file &&
+      (file.type === 'application/pdf' || file.type === 'image/jpeg')
+    ) {
+      if (file.size <= maxSizeInBytes) {
+        this.showSpinner = true;
+        this.uploadFile(file, doc);
+      } else {
+        this.showToast('El archivo excede el límite de 2MB.');
+        this.fileInput.nativeElement.value = '';
+      }
+    } else {
+      this.showToast('Por favor, selecciona un archivo PDF o JPG.');
+      this.fileInput.nativeElement.value = '';
+    }
+  }
+
+  async uploadFile(file: File, doc: Document) {
+    try {
+      const updatedDocument: Document = await lastValueFrom(
+        this.gloveboxService.uploadFile(file, doc.url, doc.id),
+      );
+      console.log('updated document --->', updatedDocument);
+      this.glovebox.documents = this.glovebox.documents.map((d) =>
+        d.id === doc.id ? updatedDocument : d,
+      );
+      this.showSpinner = false;
+
+      this.showToast('Archivo subido de manera exitosa.');
+    } catch (error) {
+      console.log('failed upload file', error);
+      this.showSpinner = false;
+
+      this.showToast(
+        'Hubo un error al subir tu archivo. Contacta a tu asesor Movipro.',
+      );
+    }
+  }
+
   showDisclaimer() {
     const dialogRef = this.dialog.open(DialogContent);
     dialogRef.afterClosed().subscribe((result) => {
@@ -150,7 +204,7 @@ export class FichaVehiculoComponent {
 
   showToast(message: string) {
     this._snackBar.open(message, 'X', {
-      duration: 3000,
+      duration: 5000,
     });
   }
 }

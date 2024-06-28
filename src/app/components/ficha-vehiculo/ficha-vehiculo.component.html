@@ -105,28 +105,36 @@
               @if (glovebox) {
                 @for (doc of glovebox.documents; track doc) {
                   @if (doc.nombre) {
-                    <mat-list-item
-                      class="document-link"
-                      (click)="downloadDocument(doc.url, doc.nombre)"
-                    >
-                      <mat-icon matListItemIcon>cloud_done</mat-icon>
+                    <mat-list-item class="document-link">
+                      <mat-icon
+                        class="icon-end"
+                        matListItemIcon
+                        fontIcon="cloud_done"
+                        matTooltip="Descargue su archivo"
+                        (click)="downloadDocument(doc.url, doc.nombre)"
+                      ></mat-icon>
                       <div matListItemTitle>{{ doc.tipo }}</div>
                       <div matListItemLine>
                         {{ doc.fecha_carga | date: "dd-MM-yyyy" }}
                       </div>
                     </mat-list-item>
                   } @else {
-                    <mat-list-item
-                      class="document-link"
-                      (click)="
-                        showToast(
-                          'Este vehiculo no tiene este tipo de documento.'
-                        )
-                      "
-                    >
-                      <mat-icon matListItemIcon>cloud_off</mat-icon>
+                    <mat-list-item class="document-link">
                       <div matListItemTitle>{{ doc.tipo }}</div>
                       <div matListItemLine>Documento pendiente</div>
+                      <input
+                        #fileInput
+                        type="file"
+                        (change)="onFileSelected($event, doc)"
+                        hidden
+                      />
+                      <mat-icon
+                        class="icon-end"
+                        matListItemIcon
+                        fontIcon="upload"
+                        matTooltip="Suba su archivo"
+                        (click)="fileInput.click()"
+                      ></mat-icon>
                     </mat-list-item>
                   }
                 }
@@ -139,4 +147,5 @@
       </mat-card-actions>
     </div>
   </mat-card>
+  <app-spinner *ngIf="showSpinner" [message]="mensajeSpinner"></app-spinner>
 </div>

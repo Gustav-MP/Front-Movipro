@@ -23,6 +23,7 @@ export const environment = {
     glovebox: {
       getByType: 'glovebox',
       getFile: 'glovebox/file',
+      uploadFile: 'glovebox/file/upload',
     },
     alerts: {
       countByUser: 'alerts/count/byUser',

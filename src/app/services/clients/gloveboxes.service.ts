@@ -4,7 +4,10 @@ import { Observable, catchError, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
-import { Glovebox } from '../../interfaces/gloveboxes/glovebox.interface';
+import {
+  Document,
+  Glovebox,
+} from '../../interfaces/gloveboxes/glovebox.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +35,24 @@ export class GloveboxesService {
       catchError((error: HttpErrorResponse) => {
         console.log('error in getGloveboxByVehicle -->', error);
         return throwError(() => new Error('Error when get glovebox'));
+      }),
+    );
+  }
+
+  uploadFile(
+    file: File,
+    path: string,
+    documentId: number,
+  ): Observable<Document> {
+    const urlUploadFile = this.baseUrl + this.apiGlovebox.uploadFile;
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('directory', path);
+    formData.append('documentId', documentId.toString());
+    return this.httpClient.post<any>(urlUploadFile, formData).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.log('error in uploadFile -->', error);
+        return throwError(() => new Error('Error when try upload file'));
       }),
     );
   }

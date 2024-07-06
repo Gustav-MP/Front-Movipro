@@ -1,46 +1,46 @@
-<h3>Vehiculo {{ plate }}</h3>
-<mat-accordion>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title> Guantera </mat-panel-title>
-      <mat-panel-description>
-        Revise sus documentos
-        <mat-icon>description</mat-icon>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-list class="documents-container">
-      @if (glovebox) {
-        @for (doc of glovebox; track doc) {
-          @if (doc.archivo) {
-            <mat-list-item class="document-link">
-              <mat-icon
-                class="icon-end"
-                matListItemIcon
-                fontIcon="cloud_done"
-                matTooltip="Descargue su archivo"
+<div class="qr-container">
+  <h3>Vehiculo --{{ plate }}--</h3>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Guantera </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-list class="documents-container">
+        @if (glovebox) {
+          @for (doc of glovebox; track doc) {
+            @if (doc.archivo) {
+              <mat-list-item
+                class="document-link"
                 (click)="openDocument(doc.archivo)"
-              ></mat-icon>
-              <div matListItemTitle>{{ doc.tipo }}</div>
-              <div matListItemLine>
-                {{ doc.fecha_carga | date: "dd-MM-yyyy" }}
-              </div>
-            </mat-list-item>
-          } @else {
-            <mat-list-item class="document-link">
-              <div matListItemTitle>{{ doc.tipo }}</div>
-              <div matListItemLine>Documento pendiente</div>
-              <mat-icon
-                class="icon-end"
-                matListItemIcon
-                fontIcon="upload"
-                matTooltip="Notifique a Movipro para subir su archivo"
-              ></mat-icon>
-            </mat-list-item>
+              >
+                <mat-icon
+                  class="icon-end blue"
+                  matListItemIcon
+                  fontIcon="cloud_done"
+                  matTooltip="Descargue su archivo"
+                ></mat-icon>
+                <div class="item-title" matListItemTitle>{{ doc.tipo }}</div>
+                <div class="item-line" matListItemLine>
+                  {{ doc.fecha_carga | date: "dd-MM-yyyy" }}
+                </div>
+              </mat-list-item>
+            } @else {
+              <mat-list-item class="document-link">
+                <div class="item-title" matListItemTitle>{{ doc.tipo }}</div>
+                <div class="item-line" matListItemLine>Documento pendiente</div>
+                <mat-icon
+                  class="icon-end red"
+                  matListItemIcon
+                  fontIcon="cloud_off"
+                  matTooltip="Notifique a Movipro para subir su archivo"
+                ></mat-icon>
+              </mat-list-item>
+            }
           }
+        } @else {
+          <p>Sin documentos</p>
         }
-      } @else {
-        <p>Sin documentos</p>
-      }
-    </mat-list>
-  </mat-expansion-panel>
-</mat-accordion>
+      </mat-list>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

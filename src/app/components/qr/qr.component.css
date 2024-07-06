@@ -1,13 +1,21 @@
+.qr-container {
+  margin: 1rem 1rem;
+}
+
 h3 {
-  font-weight: bold;
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: x-large;
 }
 
 .mat-mdc-card-title,
 .mat-mdc-card-subtitle,
 ::ng-deep .mat-mdc-list-item-unscoped-content,
-.mat-expansion-panel-header-title,
 .mat-expansion-panel-header-description {
   font-family: "Bai Jamjuree", sans-serif !important;
+}
+
+mat-expansion-panel-header {
+  box-shadow: inherit;
 }
 
 mat-accordion {
@@ -27,6 +35,20 @@ mat-card-content {
 
 ::ng-deep mat-list-item span span {
   font-size: 14px !important;
+}
+
+mat-panel-title {
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 20px;
+}
+
+.item-title {
+  font-size: 16px;
+}
+
+.item-line {
+  color: grey;
+  font-style: italic;
 }
 
 .downBold {
@@ -82,9 +104,11 @@ mat-card-actions button {
 }
 
 .document-link {
+  cursor: pointer !important;
   text-decoration: none;
   border-bottom: 2px solid transparent;
   transition: border-bottom 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 .document-link:hover {
@@ -100,10 +124,17 @@ mat-card-actions button {
 }
 
 .icon-end {
-  cursor: pointer;
   order: 1;
 }
 
 .icon-end:hover {
   color: #ff5a4e;
+}
+
+.red {
+  color: #ff5a4e;
+}
+
+.blue {
+  color: #002140;
 }

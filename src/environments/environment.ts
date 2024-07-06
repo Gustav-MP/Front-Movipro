@@ -35,6 +35,9 @@ export const environment = {
       getByVehicle: 'services/byVehicle',
       getByFleet: 'services/byFleet',
     },
+    qr: {
+      getGlovebox: 'qr/glovebox',
+    },
   },
   jwt: {
     secret: 'AITfjVuLVa6P7KNw8SzT1tHu6PI7Ne0c',

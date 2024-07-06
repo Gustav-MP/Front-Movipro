@@ -10,3 +10,9 @@ export interface Document {
   url: string;
   fecha_carga: Date;
 }
+
+export interface QrDocument {
+  tipo: string;
+  fecha_carga: Date;
+  archivo: string;
+}

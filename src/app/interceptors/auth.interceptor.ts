@@ -9,7 +9,7 @@ interface HttpHeaders {
 }
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
-  const excludedUrls = ['/auth/login'];
+  const excludedUrls = ['/auth/login', '/qr'];
   const uploadFileUrl = '/glovebox/file/upload';
 
   const shouldExclude = excludedUrls.some((url) => req.url.includes(url));

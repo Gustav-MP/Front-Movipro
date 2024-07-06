@@ -5,6 +5,7 @@ import { roleGuard } from './guards/role.guard';
 import { LoginLayoutComponent } from './components/layouts/login-layout/login-layout.component';
 import { MainLayoutComponent } from './components/layouts/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './components/layouts/admin-layout/admin-layout.component';
+import { QrComponent } from './components/qr/qr.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
         component: LoginComponent,
       },
     ],
+  },
+  {
+    path: 'qr',
+    component: QrComponent,
   },
   {
     path: '',
